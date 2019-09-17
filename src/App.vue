@@ -1,31 +1,38 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <router-view @addScore="addScore"></router-view>
   </div>
 </template>
 
+<script>
+var data = {
+  records: 0,
+  SD: window.parent
+};
+
+export default {
+  name: "app",
+
+  data: function() {
+    return data;
+  },
+
+  methods: {
+    addScore: function(s) {
+      this.records += Number(s);
+      console.log(" gen. records " + this.records);
+      // this.SD.SetReachedEnd();
+      // this.SD.SetScore(Number(this.score),100,0);
+      // this.SD.CommitData();
+    }
+  }
+};
+
+// var SD = window.parent.parent
+
+//       SD.SetScore(data.records, 100, 0);
+//       SD.CommitData();
+</script>
+
 <style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
